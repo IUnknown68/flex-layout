@@ -1,0 +1,46 @@
+/* All elements. */
+fl-box,
+fl-row,
+fl-column {
+  overflow: hidden;
+  display: block;
+}
+
+/* Rows and columns. */
+fl-row,
+fl-column {
+  display: flex;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Any vertical layout. */
+fl-column {
+  flex-direction: column;
+}
+
+/* Any horizontal layout. */
+fl-row {
+  flex-direction: row;
+}
+
+/* A box stretching to available width/height. */
+fl-box[stretch],
+fl-row[stretch],
+fl-column[stretch] {
+  flex: 0 1 100%;
+}
+
+/* A box not allowed to stretch / shrink. Default is flex-basis: auto. */
+fl-box[fixed],
+fl-row[fixed],
+fl-column[fixed] {
+  flex: 0 0 auto;
+}
+
+/* A box with scrolling. */
+fl-box[scroll],
+fl-row[scroll],
+fl-column[scroll] {
+  overflow: auto;
+}

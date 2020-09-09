@@ -1,0 +1,195 @@
+<!doctype html>
+<html class="fl-fullscreen">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="stylesheet" href="./flex-layout.css">
+<style>
+
+.fl-fullscreen {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/*********
+ * Visuals.
+ */
+body {
+  background-color: white;
+  margin: 0;
+}
+
+#header {
+  background-color: antiquewhite;
+}
+
+#footer {
+  background-color: powderblue;
+}
+
+#topleft {
+  background-color: darkkhaki;
+}
+
+#middleleft {
+  background-color: aliceblue;
+}
+
+#bottomleft {
+  background-color: cadetblue;
+}
+
+#topright {
+  background-color: burlywood;
+}
+
+#middleright {
+  background-color: cornsilk;
+}
+
+#bottomright {
+  background-color: yellowgreen;
+}
+
+label {
+  display: inline-block;
+  padding: 0.2em 0.5em;
+}
+
+/* sizes etc */
+#footer {
+  flex-basis: 60px;
+}
+
+#left {
+  flex-basis: 350px;
+}
+
+#topright {
+  flex-basis: 50px;
+}
+
+#bottomleft {
+  flex-basis: 50px;
+}
+
+#header,
+#footer,
+#topleft,
+#middleleft,
+#bottomleft,
+#topright,
+#middleright,
+#bottomright
+{
+  padding: 10px;
+}
+
+/* other stuff */
+#left,
+#right {
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.highcontent {
+  background-color: rgba(128,128,128,0.1);
+  padding: 10px;
+  border: 1px dotted black;
+  height: 1500px;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  #left.leftonly {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  #left {
+    flex-basis: 50%;
+  }
+}
+
+</style>
+</head>
+
+<body class="fl-fullscreen">
+  <fl-column>
+    <!-- HEADER -->
+    <fl-box fixed id="header">
+      <span>Header, auto height</span>
+      <div>
+        <div class="leftonly">
+          <label><input type="checkbox" id="cbtopleft" checked>Top left</label>
+          <label><input type="checkbox" id="cbcontentleft" checked>Big Content left</label>
+          <label><input type="checkbox" id="cbbottomleft" checked>Bottom left</label>
+        </div>
+          <label><input type="checkbox" id="cbtopright" checked>Top right</label>
+          <label><input type="checkbox" id="cbcontentright" checked>Big Content right</label>
+          <label><input type="checkbox" id="cbbottomright" checked>Bottom right</label>
+          <label><input type="checkbox" id="cbfooter" checked>Footer</label>
+      </div>
+    </fl-box>
+
+    <!-- MAIN -->
+    <fl-row stretch id="main">
+
+      <!-- LEFT -->
+      <fl-column fixed id="left" class="leftonly">
+        <fl-box fixed id="topleft">
+          <span>Top left, auto height</span>
+        </fl-box>
+        <fl-box stretch scroll id="middleleft">
+          <div class="highcontent" id="contentleft">Big content</div>
+        </fl-box>
+        <fl-box fixed id="bottomleft">
+          <span>Bottom left, fixed height</span>
+        </fl-box>
+      </fl-column>
+
+      <!-- RIGHT -->
+      <fl-column stretch id="right">
+        <fl-box fixed id="topright">
+          <span>Top right, fixed height</span>
+        </fl-box>
+        <fl-box stretch scroll id="middleright">
+          <div class="highcontent" id="contentright">Big content</div>
+        </fl-box>
+        <fl-box fixed id="bottomright">
+          <span>Bottom right, auto height</span>
+        </fl-box>
+      </fl-column>
+    </fl-row>
+
+    <!-- FOOTER -->
+    <fl-box fixed id="footer">
+      <span>Footer, fixed height</span>
+    </fl-box>
+  </fl-column>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script>
+function cbHandler(id) {
+  $(`#cb${id}`).on('change', () => {
+    $(`#${id}`).toggleClass('hidden');
+  });
+}
+
+$(document).ready(() => {
+  [
+    'topleft', 'topright',
+    'contentleft', 'contentright',
+    'bottomleft', 'bottomright',
+    'footer'
+  ].forEach(cbHandler);
+});
+</script>
+</body>
+</html>
