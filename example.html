@@ -29,28 +29,22 @@ body {
   background-color: powderblue;
 }
 
-#topleft {
-  background-color: darkkhaki;
-}
-
-#middleleft {
+#left {
   background-color: aliceblue;
 }
 
-#bottomleft {
-  background-color: cadetblue;
-}
-
+#topleft,
 #topright {
-  background-color: burlywood;
+  background-color: rgba(0, 150, 0, 0.1);
 }
 
-#middleright {
+#bottomright,
+#bottomleft {
+  background-color: rgba(0, 0, 150, 0.1);
+}
+
+#right {
   background-color: cornsilk;
-}
-
-#bottomright {
-  background-color: yellowgreen;
 }
 
 label {
@@ -122,19 +116,19 @@ label {
 </head>
 
 <body class="fl-fullscreen">
-  <fl-column>
+  <fl-column class="fl-fullscreen">
     <!-- HEADER -->
     <fl-box fixed id="header">
       <span>Header, auto height</span>
       <div>
         <div class="leftonly">
-          <label><input type="checkbox" id="cbtopleft" checked>Top left</label>
+          <label><input type="checkbox" id="cbtopleft" checked>Left-Top</label>
           <label><input type="checkbox" id="cbcontentleft" checked>Big Content left</label>
-          <label><input type="checkbox" id="cbbottomleft" checked>Bottom left</label>
+          <label><input type="checkbox" id="cbbottomleft" checked>Left-bottom</label>
         </div>
-          <label><input type="checkbox" id="cbtopright" checked>Top right</label>
+          <label><input type="checkbox" id="cbtopright" checked>Right-top</label>
           <label><input type="checkbox" id="cbcontentright" checked>Big Content right</label>
-          <label><input type="checkbox" id="cbbottomright" checked>Bottom right</label>
+          <label><input type="checkbox" id="cbbottomright" checked>Right-bottom</label>
           <label><input type="checkbox" id="cbfooter" checked>Footer</label>
       </div>
     </fl-box>
@@ -144,52 +138,57 @@ label {
 
       <!-- LEFT -->
       <fl-column fixed id="left" class="leftonly">
-        <fl-box fixed id="topleft">
-          <span>Top left, auto height</span>
-        </fl-box>
+        <fl-row fixed id="topleft">
+          <fl-box stretch>
+            <span>Left-Top, auto height</span>
+          </fl-box>
+          <fl-box fixed>
+            <span>Right</span>
+          </fl-box>
+        </fl-row>
         <fl-box stretch scroll id="middleleft">
           <div class="highcontent" id="contentleft">Big content</div>
         </fl-box>
         <fl-box fixed id="bottomleft">
-          <span>Bottom left, fixed height</span>
+          <span>Left-bottom, fixed height</span>
         </fl-box>
       </fl-column>
 
       <!-- RIGHT -->
       <fl-column stretch id="right">
-        <fl-box fixed id="topright">
-          <span>Top right, fixed height</span>
-        </fl-box>
+        <fl-row fixed center id="topright">
+          <span>Right-top, fixed height, centered</span>
+        </fl-row>
         <fl-box stretch scroll id="middleright">
           <div class="highcontent" id="contentright">Big content</div>
         </fl-box>
         <fl-box fixed id="bottomright">
-          <span>Bottom right, auto height</span>
+          <span>Right-bottom, auto height</span>
         </fl-box>
       </fl-column>
     </fl-row>
 
     <!-- FOOTER -->
-    <fl-box fixed id="footer">
-      <span>Footer, fixed height</span>
-    </fl-box>
+    <fl-row fixed center id="footer">
+      <span>Footer, fixed height, centered</span>
+    </fl-row>
   </fl-column>
+</body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script>
 function cbHandler(id) {
-  $(`#cb${id}`).on('change', () => {
-    $(`#${id}`).toggleClass('hidden');
-  });
+$(`#cb${id}`).on('change', () => {
+  $(`#${id}`).toggleClass('hidden');
+});
 }
 
 $(document).ready(() => {
-  [
-    'topleft', 'topright',
-    'contentleft', 'contentright',
-    'bottomleft', 'bottomright',
-    'footer'
-  ].forEach(cbHandler);
+[
+  'topleft', 'topright',
+  'contentleft', 'contentright',
+  'bottomleft', 'bottomright',
+  'footer'
+].forEach(cbHandler);
 });
 </script>
-</body>
 </html>
